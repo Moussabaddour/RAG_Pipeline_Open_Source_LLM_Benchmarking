@@ -1,6 +1,5 @@
 import os
 
-# Force HuggingFace libraries to work fully offline (use local cache only)
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 os.environ["HF_HUB_OFFLINE"] = "1"
 

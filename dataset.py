@@ -3,7 +3,7 @@
 DATASET = [
 
     # =========================
-    # 📄 EigenGAN
+    # EigenGAN
     # =========================
     {
         "paper": "EigenGAN",
@@ -26,7 +26,7 @@ DATASET = [
     },
 
     # =========================
-    # 📄 MFGAN
+    # MFGAN
     # =========================
     {
         "paper": "MFGAN",
@@ -49,7 +49,7 @@ DATASET = [
     },
 
     # =========================
-    # 📄 CMGAN (multi-generator)
+    # CMGAN (multi-generator)
     # =========================
     {
         "paper": "CMGAN",
@@ -68,7 +68,7 @@ DATASET = [
     },
 
     # =========================
-    # 📄 Ontology Depth Estimation
+    # Ontology Depth Estimation
     # =========================
     {
         "paper": "Ontology Depth",

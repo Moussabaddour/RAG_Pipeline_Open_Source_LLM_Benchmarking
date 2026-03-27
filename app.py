@@ -36,11 +36,7 @@ if "vectorstore" not in st.session_state:
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# --- Input management (never touch these AFTER the widget renders) ---
-# input_text  : the value we WANT the box to show on next render
-# input_ver   : incrementing this key forces Streamlit to create a
-#               brand-new widget, which picks up the new `value=` arg.
-#               This sidesteps the "cannot modify after instantiation" error.
+# --- Input management  ---
 if "input_text" not in st.session_state:
     st.session_state.input_text = ""
 if "input_ver" not in st.session_state:
@@ -145,11 +141,6 @@ for entry in st.session_state.chat_history:
             with st.expander("📄 Retrieved Context"):
                 st.write(result["context"])
 
-# =========================
-# SUGGESTION CHIPS
-# Rendered BEFORE the text_area. On click we only touch `input_text`
-# and `input_ver` (not the widget key), then rerun — safe.
-# =========================
 
 paper_data = next(p for p in DATASET if p["paper"] == selected_paper)
 
@@ -166,8 +157,6 @@ else:
 
 # =========================
 # INPUT BOX
-# key changes whenever input_ver changes, so Streamlit treats it as a
-# brand-new widget and honours the value= argument.
 # =========================
 
 widget_key = f"qa_input_{st.session_state.input_ver}"

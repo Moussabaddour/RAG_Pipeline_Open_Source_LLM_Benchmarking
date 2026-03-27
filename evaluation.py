@@ -3,17 +3,12 @@ from sentence_transformers import SentenceTransformer, util
 
 # -------------------------
 # Load embedding model once
-# (reuses the same model already used in rag_pipeline.py)
 # -------------------------
 _embedder = SentenceTransformer("all-MiniLM-L6-v2", local_files_only=True)
 
 
 # -------------------------
 # 1. Answer Quality
-# Semantic similarity between the answer and the ground-truth keywords.
-# Uses cosine similarity on sentence embeddings instead of keyword matching,
-# so synonyms and paraphrases are rewarded rather than penalised.
-# Range: [0, 1]
 # -------------------------
 def answer_quality(answer: str, keywords: list[str]) -> float:
     if not answer.strip() or not keywords:
@@ -26,10 +21,6 @@ def answer_quality(answer: str, keywords: list[str]) -> float:
 
 # -------------------------
 # 2. Faithfulness
-# Measures how semantically grounded the answer is in the retrieved context.
-# A high score means the answer is "saying the same thing" as the context,
-# not just copying words from it.
-# Range: [0, 1]
 # -------------------------
 def faithfulness(answer: str, context: str) -> float:
     if not answer.strip() or not context.strip():
@@ -41,11 +32,6 @@ def faithfulness(answer: str, context: str) -> float:
 
 # -------------------------
 # 3. Context Utilization
-# Measures how well the answer covers the information spread across
-# individual context chunks. Each chunk is embedded separately; we
-# compute cosine similarity with the answer and average the scores.
-# This penalises answers that only address one chunk while ignoring others.
-# Range: [0, 1]
 # -------------------------
 def context_utilization(answer: str, context: str) -> float:
     if not answer.strip() or not context.strip():
