@@ -49,9 +49,10 @@ Setup Instructions
         pip install -r requirements.txt
 
 Usage
+    
     - Run the main pipeline
         python main.py
-
+        
     OR
 
     - Launch the web interface
