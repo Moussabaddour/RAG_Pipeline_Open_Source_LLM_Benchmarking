@@ -76,7 +76,7 @@ def load_single_document(fp):
     loader = PyPDFLoader(fp) if fp.endswith(".pdf") else TextLoader(fp)
     return loader.load()
 
-if st.sidebar.button("📥 Load Selected Paper"):
+if st.sidebar.button("📥 Load Selected Paper and Models"):
     if not file_name or not os.path.exists(file_path):
         st.sidebar.error(f"File not found: {file_path}")
         st.stop()
