@@ -31,14 +31,14 @@ def save_fig(fig, name):
     path = f"outputs/{name}.png"
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"  💾 Saved → {path}")
+    print(f"   Saved → {path}")
 
 
 # ------------------------------------------------------------------
 # Plot 1 — Overall summary: grouped bars (metrics) + latency line
 # ------------------------------------------------------------------
 def plot_summary(summary):
-    print("\n📊 Plotting overall summary...")
+    print("\n Plotting overall summary...")
     model_list    = list(summary["model"])
     n_models      = len(model_list)
     x             = np.arange(n_models)
@@ -76,7 +76,7 @@ def plot_summary(summary):
 # Plot 2 — Heatmap: models × papers (answer quality)
 # ------------------------------------------------------------------
 def plot_heatmap(df):
-    print("\n📊 Plotting per-paper heatmap...")
+    print("\n Plotting per-paper heatmap...")
     model_list = list(df["model"].unique())
     data = np.zeros((len(model_list), len(PAPERS)))
 
@@ -109,7 +109,7 @@ def plot_heatmap(df):
 # Plot 3 — Per-paper grouped bars for each metric
 # ------------------------------------------------------------------
 def plot_per_paper_metrics(df):
-    print("\n📊 Plotting per-paper metric breakdown...")
+    print("\n Plotting per-paper metric breakdown...")
     model_list = list(df["model"].unique())
     n_models   = len(model_list)
     n_papers   = len(PAPERS)
@@ -147,7 +147,7 @@ def plot_per_paper_metrics(df):
 # Plot 4 — Latency bar chart
 # ------------------------------------------------------------------
 def plot_latency(summary):
-    print("\n📊 Plotting latency comparison...")
+    print("\n Plotting latency comparison...")
     model_list = list(summary["model"])
     latencies  = list(summary["latency"])
 
@@ -173,7 +173,7 @@ def plot_latency(summary):
 # Plot 5 — Radar chart: one polygon per model across 3 metrics
 # ------------------------------------------------------------------
 def plot_radar(summary):
-    print("\n📊 Plotting radar chart...")
+    print("\n Plotting radar chart...")
     categories = METRIC_NAMES
     n_cats     = len(categories)
     angles     = np.linspace(0, 2 * np.pi, n_cats, endpoint=False).tolist()
@@ -203,20 +203,20 @@ def plot_radar(summary):
 
 def main():
 
-    print("📄 Loading documents...")
+    print(" Loading documents...")
     docs = load_documents("data/")
 
-    print("✂️ Splitting documents...")
+    print(" Splitting documents...")
     chunks = split_documents(docs)
 
-    print("🔍 Creating vector store...")
+    print(" Creating vector store...")
     vectorstore = create_vectorstore(chunks)
 
     models      = ["mistral", "tinyllama", "gemma", "qwen", "phi3"]
     all_results = []
 
     for model_name in models:
-        print(f"\n🚀 Running model: {model_name}")
+        print(f"\n Running model: {model_name}")
         llm     = load_llm(model_name)
         rag     = build_rag_chain(llm, vectorstore)
         results = evaluate_rag(rag, DATASET, model_name)
@@ -224,24 +224,24 @@ def main():
 
     df, summary = build_results_table(all_results)
 
-    print("\n📊 Detailed Results:")
+    print("\n Detailed Results:")
     print(df.to_string(index=False))
 
-    print("\n📈 Summary:")
+    print("\n Summary:")
     print(summary.to_string(index=False))
 
     os.makedirs("outputs", exist_ok=True)
     df.to_csv("outputs/results.csv", index=False)
     summary.to_csv("outputs/summary.csv", index=False)
-    print("\n✅ CSVs saved to outputs/")
+    print("\n CSVs saved to outputs/")
 
-    print("\n🎨 Generating plots...")
+    print("\n Generating plots...")
     plot_summary(summary)
     plot_heatmap(df)
     plot_per_paper_metrics(df)
     plot_latency(summary)
     plot_radar(summary)
-    print("\n✅ All plots saved to outputs/")
+    print("\n All plots saved to outputs/")
 
 
 if __name__ == "__main__":
