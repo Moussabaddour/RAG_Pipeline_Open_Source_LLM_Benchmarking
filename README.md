@@ -44,8 +44,8 @@ Setup Instructions
     Option A — Using venv
 
         sudo apt install python3.10-venv
-        python3 -m venv venv
-        source venv/bin/activate
+        python3 -m venv <environment_name>
+        source <environment_name>/bin/activate
     
     Option B — Using Conda
 
@@ -60,12 +60,14 @@ Usage
     
     - Run the main pipeline
 
+
         python main.py
 
     OR
 
     - Launch the web interface
-    
+
+
         streamlit run app.py
         
         The application will be available at http://localhost:8501/
