@@ -89,4 +89,4 @@ Using the Web Interface
         Answer Quality
         Faithfulness
         Context Utilization
-        Latency
+        Latency.
