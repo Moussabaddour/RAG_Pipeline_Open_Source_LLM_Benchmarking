@@ -1,94 +1,106 @@
 import time
- 
- 
+from sentence_transformers import SentenceTransformer, util
+
+# -------------------------
+# Load embedding model once
+# (reuses the same model already used in rag_pipeline.py)
+# -------------------------
+_embedder = SentenceTransformer("all-MiniLM-L6-v2", local_files_only=True)
+
+
 # -------------------------
 # 1. Answer Quality
+# Semantic similarity between the answer and the ground-truth keywords.
+# Uses cosine similarity on sentence embeddings instead of keyword matching,
+# so synonyms and paraphrases are rewarded rather than penalised.
+# Range: [0, 1]
 # -------------------------
-def answer_quality(answer, keywords):
-    answer = answer.lower()
-    hits = sum(1 for kw in keywords if kw.lower() in answer)
-    return hits / len(keywords)
- 
- 
+def answer_quality(answer: str, keywords: list[str]) -> float:
+    if not answer.strip() or not keywords:
+        return 0.0
+    ground_truth = " ".join(keywords)
+    answer_emb   = _embedder.encode(answer,       convert_to_tensor=True)
+    gt_emb       = _embedder.encode(ground_truth, convert_to_tensor=True)
+    return float(util.cos_sim(answer_emb, gt_emb))
+
+
 # -------------------------
 # 2. Faithfulness
+# Measures how semantically grounded the answer is in the retrieved context.
+# A high score means the answer is "saying the same thing" as the context,
+# not just copying words from it.
+# Range: [0, 1]
 # -------------------------
-def faithfulness(answer, context):
-    answer_words = set(answer.lower().split())
-    context_words = set(context.lower().split())
- 
-    overlap = answer_words.intersection(context_words)
-    return len(overlap) / max(len(answer_words), 1)
- 
- 
+def faithfulness(answer: str, context: str) -> float:
+    if not answer.strip() or not context.strip():
+        return 0.0
+    answer_emb  = _embedder.encode(answer,  convert_to_tensor=True)
+    context_emb = _embedder.encode(context, convert_to_tensor=True)
+    return float(util.cos_sim(answer_emb, context_emb))
+
+
 # -------------------------
 # 3. Context Utilization
+# Measures how well the answer covers the information spread across
+# individual context chunks. Each chunk is embedded separately; we
+# compute cosine similarity with the answer and average the scores.
+# This penalises answers that only address one chunk while ignoring others.
+# Range: [0, 1]
 # -------------------------
-def context_utilization(answer, context):
-    """
-    Measures how much of the retrieved context is reflected in the answer.
-    For each meaningful context sentence, computes word-overlap with the answer.
-    Returns the average overlap score across all non-trivial sentences.
-    """
-    answer_words = set(answer.lower().split())
- 
-    # Split on double newlines (chunk boundaries) then further on single newlines
+def context_utilization(answer: str, context: str) -> float:
+    if not answer.strip() or not context.strip():
+        return 0.0
+
+    # Split on chunk boundaries (double or single newlines)
     sentences = [s.strip() for s in context.replace("\n\n", "\n").split("\n")]
- 
-    # Keep only sentences with at least 5 words (filter out headers/fragments)
+    # Keep only meaningful sentences (≥ 5 words)
     sentences = [s for s in sentences if len(s.split()) >= 5]
- 
+
     if not sentences:
         return 0.0
- 
-    scores = []
-    for sent in sentences:
-        sent_words = set(sent.lower().split())
-        overlap = len(answer_words & sent_words)
-        scores.append(overlap / max(len(sent_words), 1))
- 
+
+    answer_emb    = _embedder.encode(answer,    convert_to_tensor=True)
+    sentence_embs = _embedder.encode(sentences, convert_to_tensor=True)
+
+    scores = [float(util.cos_sim(answer_emb, s_emb)) for s_emb in sentence_embs]
     return sum(scores) / len(scores)
- 
- 
+
+
 # -------------------------
 # 4. Evaluation loop
 # -------------------------
-def evaluate_rag(rag_chain, dataset, model_name):
- 
+def evaluate_rag(rag_chain, dataset, model_name: str) -> list[dict]:
+
     results = []
- 
+
     for paper_data in dataset:
- 
+
         paper = paper_data["paper"]
- 
+
         for question in paper_data["questions"]:
- 
-            start = time.time()
- 
+
+            start  = time.time()
             output = rag_chain.invoke(question)
- 
             latency = time.time() - start
- 
-            # answer = output["answer"]
-            # context = output["context"]
+
             if isinstance(output, dict):
-                answer = output.get("answer", "")
+                answer  = output.get("answer", "")
                 context = output.get("context", "")
             else:
-                answer = output
+                answer  = output
                 context = ""
-                
+
             keywords = paper_data["ground_truth"][question]
- 
+
             results.append({
-                "model": model_name,
-                "paper": paper,
-                "question": question,
-                "answer": answer,
-                "latency": latency,
-                "answer_quality": answer_quality(answer, keywords),
-                "faithfulness": faithfulness(answer, context),
-                "context_utilization": context_utilization(answer, context)
+                "model":               model_name,
+                "paper":               paper,
+                "question":            question,
+                "answer":              answer,
+                "latency":             latency,
+                "answer_quality":      answer_quality(answer, keywords),
+                "faithfulness":        faithfulness(answer, context),
+                "context_utilization": context_utilization(answer, context),
             })
- 
+
     return results
