@@ -73,3 +73,20 @@ OR
 The application will be available at http://localhost:8501/
 
 
+Using the Web Interface
+1- Select a paper
+        Choose the document to be used as input for the RAG system.
+2- Select model(s)
+        Choose one or multiple LLMs for evaluation.
+3- Load the system
+        Click "Load Selected Paper" to initialize the RAG pipeline and models.
+4- Ask a question
+        Select a predefined question (grounded evaluation)
+        OR write your own question in the text field (may be less grounded)
+5-  View results
+        Generated answer
+        Evaluation metrics:
+        Answer Quality
+        Faithfulness
+        Context Utilization
+        Latency
