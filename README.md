@@ -72,11 +72,11 @@ It includes:
 
                 n_gpu_layers = 0
                 
-                       -  0 → CPU only (default, stable)
+                        -  0 → CPU only (default, stable)
                 
-                        - 1 → full GPU usage (all layers on GPU)
+                        -  1 → full GPU usage (all layers on GPU)
                 
-                        - N → partial GPU (e.g., 20 layers on GPU, rest on CPU)
+                        -  N → partial GPU (e.g., 20 layers on GPU, rest on CPU)
 
         ⚠️ Note:
 
