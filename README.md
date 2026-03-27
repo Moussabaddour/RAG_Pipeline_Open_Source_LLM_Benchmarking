@@ -26,7 +26,7 @@ It includes:
     
     Download the models from the following links:
 
-    🔹 LLM Models
+    🔹 LLM Models 
             Download the language models used in the RAG pipeline:
 
             
