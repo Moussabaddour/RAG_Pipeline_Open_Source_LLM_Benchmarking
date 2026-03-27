@@ -46,6 +46,7 @@ Setup Instructions
         source venv/bin/activate
     
     Option B — Using Conda
+    
         conda create --name <your-env> python=3.10
         conda activate <your-env>
 
