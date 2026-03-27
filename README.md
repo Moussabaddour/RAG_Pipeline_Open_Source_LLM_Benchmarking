@@ -52,9 +52,8 @@ It includes:
 
         conda create --name <your-env> python=3.10
         conda activate <your-env>
-        
-### ⚠️ Environment Recommendation
-This project is best run using a Conda environment. While `venv` can be used, it may lead to issues such as slower performance, missing GPU support, or Streamlit-related limitations depending on the system configuration.
+
+> ⚠️ Recommended: Use Conda. Using `venv` may cause compatibility issues.
 
 3. Install dependencies
 
