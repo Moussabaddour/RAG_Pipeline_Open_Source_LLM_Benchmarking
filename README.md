@@ -48,7 +48,7 @@ It includes:
         python3 -m venv <environment_name>
         source <environment_name>/bin/activate
     
-    Option B — Using Conda
+    Option B — Using Conda (Recomended)
 
         conda create --name <your-env> python=3.10
         conda activate <your-env>
