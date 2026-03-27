@@ -59,11 +59,13 @@ Setup Instructions
 Usage
     
     - Run the main pipeline
+
         python main.py
 
     OR
 
     - Launch the web interface
+    
         streamlit run app.py
         
         The application will be available at http://localhost:8501/
