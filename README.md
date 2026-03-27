@@ -62,21 +62,23 @@ It includes:
 - Run the main pipeline
     
     
-        python main.py (This process may take approximately 25 minutes using CPU, as it evaluates all questions across 5 models.) 
+        python main.py 
+        
+(This process may take approximately 25 minutes using CPU, as it evaluates all questions across 5 models.) 
         
         
-        Optional: GPU Acceleration
+Optional: GPU Acceleration
 
         
-        You can enable GPU acceleration by modifying the following parameter in llm_loader.py:
+You can enable GPU acceleration by modifying the following parameter in llm_loader.py:
 
-                n_gpu_layers = 0
+        n_gpu_layers = 0
                 
-                        -  0 → CPU only (default, stable)
+                -  0 → CPU only (default, stable)
                 
-                        -  1 → full GPU usage (all layers on GPU)
+                -  1 → full GPU usage (all layers on GPU)
                 
-                        -  N → partial GPU (e.g., 20 layers on GPU, rest on CPU)
+                -  N → partial GPU (e.g., 20 layers on GPU, rest on CPU)
 
         ⚠️ Note:
 
