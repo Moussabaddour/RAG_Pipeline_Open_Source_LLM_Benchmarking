@@ -26,16 +26,13 @@ It includes:
     
     Download the models from the following links:
 
-    🔹 LLM Models 
-            Download the language models used in the RAG pipeline:
+    🔹 LLM Models: Download the language models used in the RAG pipeline:
 
             
                 https://filesender.renater.fr/?s=download&token=e1702004-d474-4930-bd60-24cd1083c83f
 
 
-    🔹 Embedding Model
-            
-            Download the embedding model used to convert text into vectors for the FAISS vector store
+    🔹 Embedding Model: Download the embedding model used to convert text into vectors for the FAISS vector store
 
                 https://filesender.renater.fr/?s=download&token=e1702004-d474-4930-bd60-24cd1083c83f
     
