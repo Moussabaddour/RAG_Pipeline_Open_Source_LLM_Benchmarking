@@ -17,8 +17,10 @@ It includes:
 Setup Instructions
 
 1. Clone the repository
+
         git clone <repository-url>
         cd <repository-folder>
+
 2. Model Downloads
 
     Download the models from the following links:
@@ -46,11 +48,12 @@ Setup Instructions
         source venv/bin/activate
     
     Option B — Using Conda
-    
+
         conda create --name <your-env> python=3.10
         conda activate <your-env>
 
 3. Install dependencies
+
         pip install -r requirements.txt
 
 Usage
