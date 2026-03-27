@@ -14,7 +14,7 @@ It includes:
 - Evaluation metrics (answer quality, faithfulness, context utilization)
 - Interactive Streamlit dashboard
 
-Setup Instructions
+## Setup Instructions
 
 1. Clone the repository
 
@@ -56,7 +56,7 @@ Setup Instructions
 
         pip install -r requirements.txt
 
-Usage
+## Usage
     
 - Run the main pipeline
     
