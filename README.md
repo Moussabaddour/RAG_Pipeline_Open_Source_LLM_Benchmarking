@@ -62,7 +62,7 @@ It includes:
 - Run the main pipeline
     
     
-        python main.py (This process may take approximately 20 minutes, as it evaluates all questions across 5 models.)
+        python main.py (This process may take approximately 25 minutes, as it evaluates all questions across 5 models.)
 
 OR
 
