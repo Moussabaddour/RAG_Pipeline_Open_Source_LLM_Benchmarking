@@ -1,8 +1,8 @@
-RAG Pipeline & Open-Source LLM Benchmarking
+# RAG Pipeline & Open-Source LLM Benchmarking
 
-Author: Moussa BADDOUR
+**Author**: Moussa BADDOUR
 
-Overview
+## Overview
 
 This project implements a Retrieval-Augmented Generation (RAG) pipeline for evaluating and benchmarking open-source Large Language Models (LLMs).
 
