@@ -90,18 +90,19 @@ Using the Web Interface
 4- Ask a question
         
         Select a predefined question (grounded evaluation)
-        OR write your own question in the text field (may be less grounded)
+        OR
+        write your own question in the text field (may be less grounded)
 
 5-  View results
         
-        Generated answer
+        1. Generated answer
 
-        Evaluation metrics
+        2. Evaluation metrics
 
-                Answer Quality
+                - Answer Quality
 
-                Faithfulness
+                - Faithfulness
 
-                Context Utilization
-                
-                Latency.
+                - Context Utilization
+
+                - Latency.
