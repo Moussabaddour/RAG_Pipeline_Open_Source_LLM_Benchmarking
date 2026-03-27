@@ -23,7 +23,7 @@ def load_llm(model_name="mistral"):
         n_ctx=4096,
         n_threads=8,
         n_batch=512,
-        n_gpu_layers=0,   # CPU-only — prevents GPU context conflicts on reload
+        n_gpu_layers=0,   # CPU-only — prevents GPU context conflicts on reload, -1 Use full GPU (all layers), 20 Partial GPU (20 layers on GPU, rest on CPU)
         verbose=False
     )
 
