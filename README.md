@@ -40,6 +40,8 @@ It includes:
     After downloading, place all models in the models/
 
 2. Create a virtual environment (Python 3.10 recommended)
+
+    The project was tested on **Linux (Ubuntu) and WSL**, but should work on any system with Python 3.10.
     
     Option A — Using venv
 
