@@ -38,6 +38,7 @@ Setup Instructions
     After downloading, place all models in the models/
 
 2. Create a virtual environment (Python 3.10 recommended)
+    
     Option A — Using venv
         sudo apt install python3.10-venv
         python3 -m venv venv
@@ -45,6 +46,7 @@ Setup Instructions
     Option B — Using Conda
         conda create --name <your-env> python=3.10
         conda activate <your-env>
+
 3. Install dependencies
         pip install -r requirements.txt
 
@@ -52,7 +54,7 @@ Usage
     
     - Run the main pipeline
         python main.py
-        
+
     OR
 
     - Launch the web interface
