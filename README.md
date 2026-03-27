@@ -19,6 +19,22 @@ Setup Instructions
 1. Clone the repository
         git clone <repository-url>
         cd <repository-folder>
+2. Model Downloads
+
+    Download the models from the following links:
+
+    🔹 LLM Models
+
+            Download the language models used in the RAG pipeline:
+                https://filesender.renater.fr/?s=download&token=e1702004-d474-4930-bd60-24cd1083c83f
+
+    🔹 Embedding Model
+
+            Download the embedding model used to convert text into vectors for the FAISS vector store
+                https://filesender.renater.fr/?s=download&token=e1702004-d474-4930-bd60-24cd1083c83f
+    
+    After downloading, place all models in the models/
+
 2. Create a virtual environment (Python 3.10 recommended)
     Option A — Using venv
         sudo apt install python3.10-venv
