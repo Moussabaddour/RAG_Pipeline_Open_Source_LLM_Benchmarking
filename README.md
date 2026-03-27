@@ -58,18 +58,18 @@ Setup Instructions
 
 Usage
     
-    - Run the main pipeline
+- Run the main pipeline
     
     
         python main.py
 
-    OR
+OR
 
-    - Launch the web interface
+- Launch the web interface
 
 
         streamlit run app.py
         
-        The application will be available at http://localhost:8501/
+The application will be available at http://localhost:8501/
 
 
